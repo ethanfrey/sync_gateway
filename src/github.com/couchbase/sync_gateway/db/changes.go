@@ -76,7 +76,7 @@ func (db *Database) addDocToChangeEntry(entry *ChangeEntry, options ChangesOptio
 	}
 
 	revID := entry.Changes[0]["rev"]
-	if includeConflicts {
+	if includeConflicts && !entry.Deleted {
 		doc.History.forEachLeaf(func(leaf *RevInfo) {
 			if leaf.ID != revID {
 				if !leaf.Deleted {
